@@ -28,11 +28,13 @@ Large-scale enterprise applications that require a robust, scalable, and secure 
 Tomcat can be embedded within Java applications, providing web server capabilities directly within the application itself.
 # (vi) Cloud Deployments:
 Tomcat is frequently used in cloud environments, leveraging its lightweight nature and compatibility with various cloud platforms.
-# (vii) Benefits:
-Lightweight and Efficient: Tomcat is known for its performance and low resource consumption compared to full-fledged application servers.
-# (vii) Open Source and Free:
+
+# Benefits:
+# (i) Lightweight and Efficient:
+Tomcat is known for its performance and low resource consumption compared to full-fledged application servers.
+# (ii) Open Source and Free:
 Being open-source, it is freely available and benefits from community contributions.
-# (ix) Mature and Stable: 
+# (iii) Mature and Stable: 
 With a long history and active development, Tomcat is a mature and stable platform.
-# (x) Comprehensive Documentation: 
+# (iv) Comprehensive Documentation: 
 Extensive documentation and community support make it easier to implement and troubleshoot.
