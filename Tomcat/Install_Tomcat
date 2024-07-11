@@ -1,6 +1,6 @@
-# Steps to install Apache Tomcat in Linux OS distribution:
+# Steps to install Apache Tomcat in Linux OS distribution: To install Apache Tomcat on a Linux OS distribution, follow these 
+steps-
 
-To install Apache Tomcat on a Linux OS distribution, follow these steps:
 1. Update Your System: Ensure your package index is up-to-date.
   #  sudo apt update   # For Debian-based systems
   #  sudo yum update   # For Red Hat-based systems
@@ -14,25 +14,30 @@ To install Apache Tomcat on a Linux OS distribution, follow these steps:
   #  wget https://downloads.apache.org/tomcat/tomcat-9/v9.0.56/bin/apache-tomcat-9.0.56.tar.gz
 
 4. Install Tomcat: Extract the downloaded file.
-  #  sudo tar xzf apache-tomcat-9.0.56.tar.gz -C /opt/tomcat --strip-components=1
+  #  sudo tar xzf apache-tomcat-9.0.56.tar.gz -C /file/location/of/apache-tomcat-9.0.56
 
 5. Set Permissions: Adjust the permissions so that the Tomcat user can access the files.
-  #  sudo chmod +x /file/location/of/tomcat/bin/*.sh
+  #  sudo chmod +x /file/location/of/apache-tomcat-9.0.56/bin/*.sh
 
-6. create environment variable: Creating environment variables for the Tomcat startup and shutdown scripts allows you to easily run these scripts without specifying their full paths. Here’s how you can set up these environment variables-
+6. create environment variable: Creating environment variables for the Tomcat startup and shutdown scripts allows you to easily
+run these scripts without specifying their full paths. Here’s how you can set up these environment variables-
 
-  (i) Open Your Profile Configuration File: Depending on your shell and system, you will typically edit either ~/.bashrc,             ~/.bash_profile, ~/.profile, or /etc/profile.
-      For example, to edit ~/.bash_profile use:
+  (i) Open Your Profile Configuration File: Depending on your shell and system, you will typically edit either ~/.bashrc,
+      ~/.bash_profile, ~/.profile, or /etc/profile. For example, to edit ~/.bash_profile use-
       #  sudo vi ~/.bash_profile
 
   (ii) Add the Environment Variables: Add the following lines to the file-
-      #  export CATALINA_HOME=/file/location/of/tomcat
+      #  export CATALINA_HOME=/file/location/of/apache-tomcat-9.0.56
       #  export CATALINA_STARTUP=$CATALINA_HOME/bin/startup.sh
       #  export CATALINA_SHUTDOWN=$CATALINA_HOME/bin/shutdown.sh
-  These lines set CATALINA_HOME to the Tomcat installation directory and then use this variable to define the paths for the       startup and shutdown scripts.
+      #  export PATH=$CATALINA_HOME/bin:$PATH
+  These lines set CATALINA_HOME to the Tomcat installation directory and then we append the Tomcat bin directory to the system's
+  PATH environment variable. By adding Tomcat's bin directory to PATH, you can run Tomcat commands like startup.sh and shutdown.sh
+  from anywhere in the terminal without needing to specify their full path.
 
-  (iii) Reload the Profile Configuration: To apply the changes, reload your profile configuration file. For example, if you             edited ~/.bashrc-
-      #  source ~/.bashrc
+  (iii) Reload the Profile Configuration: To apply the changes, reload your profile configuration file. For example, if you edited
+        ~/.bash_profile-
+      #  source ~/.bash_profile
 
   (iv) Verify the Environment Variables: Check that the environment variables are set correctly by echoing them.
       #  echo $CATALINA_HOME
@@ -42,4 +47,5 @@ To install Apache Tomcat on a Linux OS distribution, follow these steps:
   (v)  Use the Environment Variables: You can now start and stop Tomcat using the environment variables.
       #  $CATALINA_STARTUP
       #  $CATALINA_SHUTDOWN
-  By setting these environment variables, you simplify the process of managing the Tomcat server, making it easier to start       and stop the server from any location in your terminal.
+  By setting these environment variables, you simplify the process of managing the Tomcat server, making it easier to start and
+  stop the server from any location in your terminal.
