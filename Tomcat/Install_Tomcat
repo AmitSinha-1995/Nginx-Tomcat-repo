@@ -21,7 +21,7 @@ To install Apache Tomcat on a Linux OS distribution, follow these steps:
 
 6. create environment variable: Creating environment variables for the Tomcat startup and shutdown scripts allows you to easily run these scripts without specifying their full paths. Here’s how you can set up these environment variables-
 
-  (i) Open Your Profile Configuration File: Depending on your shell and system, you will typically edit either ~/.bashrc,                       ~/.bash_profile, ~/.profile, or /etc/profile.
+  (i) Open Your Profile Configuration File: Depending on your shell and system, you will typically edit either ~/.bashrc,             ~/.bash_profile, ~/.profile, or /etc/profile.
       For example, to edit ~/.bash_profile use:
       #  sudo vi ~/.bash_profile
 
@@ -29,9 +29,9 @@ To install Apache Tomcat on a Linux OS distribution, follow these steps:
       #  export CATALINA_HOME=/file/location/of/tomcat
       #  export CATALINA_STARTUP=$CATALINA_HOME/bin/startup.sh
       #  export CATALINA_SHUTDOWN=$CATALINA_HOME/bin/shutdown.sh
-  These lines set CATALINA_HOME to the Tomcat installation directory and then use this variable to define the paths for the startup and     shutdown scripts.
+  These lines set CATALINA_HOME to the Tomcat installation directory and then use this variable to define the paths for the       startup and shutdown scripts.
 
-  (iii) Reload the Profile Configuration: To apply the changes, reload your profile configuration file. For example, if you edited                ~/.bashrc:
+  (iii) Reload the Profile Configuration: To apply the changes, reload your profile configuration file. For example, if you             edited ~/.bashrc-
       #  source ~/.bashrc
 
   (iv) Verify the Environment Variables: Check that the environment variables are set correctly by echoing them.
@@ -42,4 +42,4 @@ To install Apache Tomcat on a Linux OS distribution, follow these steps:
   (v)  Use the Environment Variables: You can now start and stop Tomcat using the environment variables.
       #  $CATALINA_STARTUP
       #  $CATALINA_SHUTDOWN
-    By setting these environment variables, you simplify the process of managing the Tomcat server, making it easier to start and             stop the server from any location in your terminal.
+  By setting these environment variables, you simplify the process of managing the Tomcat server, making it easier to start       and stop the server from any location in your terminal.
