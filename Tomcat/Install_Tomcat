@@ -1,5 +1,6 @@
 Ref: https://tomcat.apache.org/
-# Steps to install Apache Tomcat in Linux OS distribution: To install Apache Tomcat on a Linux OS distribution, follow these 
+
+Steps to install Apache Tomcat in Linux OS distribution: To install Apache Tomcat on a Linux OS distribution, follow these 
 steps-
 
 1. Update Your System: Ensure your package index is up-to-date.
