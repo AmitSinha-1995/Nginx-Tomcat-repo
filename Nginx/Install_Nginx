@@ -41,9 +41,11 @@ BD82 7BD9 BF62, and if so, accept it.
 2. Ubuntu:
     (i) Install the prerequisites:
         #    sudo apt install curl gnupg2 ca-certificates lsb-release ubuntu-keyring
+
     (ii) Import an official nginx signing key so apt could verify the packages authenticity. Fetch the key:
         #    curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor \
             | sudo tee /usr/share/keyrings/nginx-archive-keyring.gpg >/dev/null
+
     (iii) Verify that the downloaded file contains the proper key:
         #    gpg --dry-run --quiet --no-keyring --import --import-options import-show \ 
              /usr/share/keyrings/nginx-archive-keyring.gpg
@@ -53,17 +55,21 @@ BD82 7BD9 BF62, and if so, accept it.
                   573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62
             uid                      nginx signing key <signing-key@nginx.com>
             Note that the output can contain other keys used to sign the packages.
+
     (iv) To set up the apt repository for stable nginx packages, run the following command:
         #    echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] \
             http://nginx.org/packages/ubuntu `lsb_release -cs` nginx" \
             | sudo tee /etc/apt/sources.list.d/nginx.list
+
     (v) If you would like to use mainline nginx packages, run the following command instead:
         #    echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] \
             http://nginx.org/packages/mainline/ubuntu `lsb_release -cs` nginx" \
             | sudo tee /etc/apt/sources.list.d/nginx.list
+
     (vi) Set up repository pinning to prefer our packages over distribution-provided ones:
         #    echo -e "Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 900\n" \
             | sudo tee /etc/apt/preferences.d/99nginx
+
     (vii) To install nginx, run the following commands:
         #    sudo apt update
         #    sudo apt install nginx
@@ -72,11 +78,13 @@ BD82 7BD9 BF62, and if so, accept it.
 Amazon-linux-2023 or Amazon-linux-2 does not come with NGINX pre-installed, but it provides the necessary package
 repositories to install it easily using the package manager, so in these amazon linux distribution it requires
 some basic steps to install nginx, as follows-
+
         #    sudo yum update -y
         #    sudo yum install nginx -y
         #    sudo systemctl start nginx
         #    sudo systemctl enable nginx
         #    sudo systemctl status nginx
+
     Verify the installation: Open your web browser and navigate to your server's public IP address. You should
     see the NGINX welcome page.
 
