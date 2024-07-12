@@ -1,14 +1,16 @@
 Ref: https://nginx.org/en/linux_packages.html
 
-Installation instructions: Before you install nginx for the first time on a new machine, you need to set up the nginx packages 
-repository. Afterward, you can install and update nginx from the repository.
+Installation instructions: Before you install nginx for the first time on a new machine, you need to set up the
+nginx packages repository. Afterward, you can install and update nginx from the repository.
 
 1. RHEL and derivatives:
-This section applies to Red Hat Enterprise Linux and its derivatives such as CentOS, Oracle Linux, Rocky Linux, AlmaLinux.
+This section applies to Red Hat Enterprise Linux and its derivatives such as CentOS, Oracle Linux, Rocky Linux,
+AlmaLinux.
     (i) Install the prerequisites:
         #    sudo yum install yum-utils
 
-    (ii) To set up the yum repository, create the file named /etc/yum.repos.d/nginx.repo with the following contents-
+    (ii) To set up the yum repository, create the file named /etc/yum.repos.d/nginx.repo with the following
+    contents-
         #    sudo vi /etc/yum.repos.d/nginx.repo
 
             [nginx-stable]
@@ -27,14 +29,14 @@ This section applies to Red Hat Enterprise Linux and its derivatives such as Cen
             gpgkey=https://nginx.org/keys/nginx_signing.key
             module_hotfixes=true
    
-    By default, the repository for stable nginx packages is used. If you would like to use mainline nginx packages, run the
-    following command:
+    By default, the repository for stable nginx packages is used. If you would like to use mainline nginx
+    packages, run the following command:
         #    sudo yum-config-manager --enable nginx-mainline
 
     (iii) To install nginx, run the following command-
         #    sudo yum install nginx
-    When prompted to accept the GPG key, verify that the fingerprint matches 573B FD6B 3D8F BC64 1079 A6AB ABF5 BD82 7BD9 BF62,
-    and if so, accept it.
+    When prompted to accept the GPG key, verify that the fingerprint matches 573B FD6B 3D8F BC64 1079 A6AB ABF5
+BD82 7BD9 BF62, and if so, accept it.
 
 2. Ubuntu:
     (i) Install the prerequisites:
@@ -43,7 +45,8 @@ This section applies to Red Hat Enterprise Linux and its derivatives such as Cen
         #    curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor \
             | sudo tee /usr/share/keyrings/nginx-archive-keyring.gpg >/dev/null
     (iii) Verify that the downloaded file contains the proper key:
-        #    gpg --dry-run --quiet --no-keyring --import --import-options import-show /usr/share/keyrings/nginx-archive-keyring.gpg
+        #    gpg --dry-run --quiet --no-keyring --import --import-options import-show \ 
+             /usr/share/keyrings/nginx-archive-keyring.gpg
         The output should contain the full fingerprint 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62 as follows:
 
             pub   rsa2048 2011-08-19 [SC] [expires: 2027-05-24]
@@ -66,16 +69,16 @@ This section applies to Red Hat Enterprise Linux and its derivatives such as Cen
         #    sudo apt install nginx
 
 3. Amazon-linux-2023 or Amazon-linux-2:
-Amazon-linux-2023 or Amazon-linux-2 does not come with NGINX pre-installed, but it provides the necessary package repositories to
-install it easily using the package manager, so in these amazon linux distribution it requires some basic steps to install nginx,
-as follows-
+Amazon-linux-2023 or Amazon-linux-2 does not come with NGINX pre-installed, but it provides the necessary package
+repositories to install it easily using the package manager, so in these amazon linux distribution it requires
+some basic steps to install nginx, as follows-
         #    sudo yum update -y
         #    sudo yum install nginx -y
         #    sudo systemctl start nginx
         #    sudo systemctl enable nginx
         #    sudo systemctl status nginx
-    Verify the installation: Open your web browser and navigate to your server's public IP address. You should see the NGINX
-    welcome page.
+    Verify the installation: Open your web browser and navigate to your server's public IP address. You should
+    see the NGINX welcome page.
 
 
 
