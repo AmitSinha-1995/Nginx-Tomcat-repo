@@ -75,9 +75,13 @@ AlmaLinux.
         #    sudo apt install nginx
 
 3. Install Nginx in Amazon-linux-2023 or Amazon-linux-2 or Ubuntu-22 version:
-Amazon-linux-2023 or Amazon-linux-2 or Ubuntu-22 version does not come with NGINX pre-installed, but it provides
-the necessary package repositories to install it easily using the package manager, so in these linux distribution
-it requires some basic steps to install nginx, as follows-
+Previously, setting up custom repositories was often necessary because the default repositories provided by the
+operating system did not always include the latest version of software packages like NGINX. Over time, package
+management systems and default repositories have improved significantly. Here's why you might not need to create
+custom repositories for NGINX on modern distributions like Amazon-linux-2023 or Amazon-linux-2 or Ubuntu-22.
+These does not come with NGINX pre-installed, but it provides the necessary package repositories to install it
+easily using the package manager, so in these linux distribution it requires some basic steps to install nginx,
+as follows-
 
         (i) For RHEL, CentOs linux distribution:
         #    sudo yum update -y
