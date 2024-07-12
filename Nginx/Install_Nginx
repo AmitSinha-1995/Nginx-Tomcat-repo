@@ -36,7 +36,7 @@ AlmaLinux.
     (iii) To install nginx, run the following command-
         #    sudo yum install nginx
     When prompted to accept the GPG key, verify that the fingerprint matches 573B FD6B 3D8F BC64 1079 A6AB ABF5
-BD82 7BD9 BF62, and if so, accept it.
+    BD82 7BD9 BF62, and if so, accept it.
 
 2. Ubuntu:
     (i) Install the prerequisites:
@@ -74,13 +74,21 @@ BD82 7BD9 BF62, and if so, accept it.
         #    sudo apt update
         #    sudo apt install nginx
 
-3. Amazon-linux-2023 or Amazon-linux-2:
-Amazon-linux-2023 or Amazon-linux-2 does not come with NGINX pre-installed, but it provides the necessary package
-repositories to install it easily using the package manager, so in these amazon linux distribution it requires
-some basic steps to install nginx, as follows-
+3. Install Nginx in Amazon-linux-2023 or Amazon-linux-2 or Ubuntu-22 version:
+Amazon-linux-2023 or Amazon-linux-2 or Ubuntu-22 version does not come with NGINX pre-installed, but it provides
+the necessary package repositories to install it easily using the package manager, so in these linux distribution
+it requires some basic steps to install nginx, as follows-
 
+        (i) For RHEL, CentOs linux distribution:
         #    sudo yum update -y
         #    sudo yum install nginx -y
+        #    sudo systemctl start nginx
+        #    sudo systemctl enable nginx
+        #    sudo systemctl status nginx
+
+        (ii) For Ubuntu linux distribution:
+        #    sudo apt update -y
+        #    sudo apt install nginx -y
         #    sudo systemctl start nginx
         #    sudo systemctl enable nginx
         #    sudo systemctl status nginx
