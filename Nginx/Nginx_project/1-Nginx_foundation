@@ -1,1 +1,80 @@
 
+# yum install nginx -y
+# yum update -y
+# systemctl start nginx
+# systemctl reload nginx
+# curl ifconfig.me           #to get public ip of your linux server
+
+==> Go to your browser and hit the url "http://your_public_ip or server_name"
+
+
+1. Host three custom application from nginx
+# vi /etc/nginx/conf.d/custom_app.conf
+
+server {
+    listen 80;
+    server_name your_server_ip or server_name;
+
+    location /app1/ {
+        alias /etc/nginx/website/app1/;
+        index index.html index.htm;
+    }
+
+    location /app2/ {
+        alias /etc/nginx/website/app2/;
+        index index.html index.htm;
+    }
+
+    location /app3/ {
+        alias /etc/nginx/website/app3/;
+        index index.html index.htm;
+    }
+}
+
+# nginx -t
+# systemctl reload nginx
+
+2. Host three custom application with error file if in case something went wrong
+# vi /etc/nginx/conf.d/custom_app.conf
+
+server {
+    listen 80;
+    server_name your_server_ip or server_name;
+
+
+    # Location blocks for static content
+    location /app1/ {
+        alias /etc/nginx/website/app1/;     #/path/to/your/application-1
+        index index.html index.htm;
+    }
+
+    location /app2/ {
+        alias /etc/nginx/website/app2/;     #/path/to/your/application-2
+        index index.html index.htm;
+    }
+
+    location /app3/ {
+        alias /etc/nginx/website/app3/;     #/path/to/your/application-3
+        index index.html index.htm;
+    }
+
+    # Location block for custom 404 error page
+    error_page 404 /custom_404.html;
+    location = /custom_404.html {
+        root /etc/nginx/website            #/path/to/your/error_pages
+        internal;
+    }
+
+    # Location block for custom 50x error page
+    error_page 500 502 503 504 /custom_50x.html;
+    location = /custom_50x.html {
+        root /etc/nginx/website           #/path/to/your/error_pages
+        internal;
+    }
+}
+
+# nginx -t
+# systemctl reload nginx
+
+
+
