@@ -103,17 +103,17 @@ server {
     server_name your_server_ip or server_name;
 
     # Location blocks for static content
-    location /app1/ {                        #you can replace app1 with your preferred name
+    location /app1/ {                        #you can replace /app1/ with your preferred name
         alias /etc/nginx/website/app1/;      #/absolute/path/to/your/application-1
         index index.html index.htm;
     }
 
-    location /app2/ {                        #you can replace app2 with your preferred name
+    location /app2/ {                        #you can replace /app2/ with your preferred name
         alias /etc/nginx/website/app2/;      #/absolue/path/to/your/application-2
         index index.html index.htm;
     }
 
-    location /app3/ {                        #you can replace app3 with your preferred name
+    location /app3/ {                        #you can replace /app3/ with your preferred name
         alias /etc/nginx/website/app3/;      #/absolute/path/to/your/application-3
         index index.html index.htm;
     }
@@ -134,17 +134,17 @@ server {
     server_name your_server_ip or server_name;
 
     # Location blocks for static content
-    location /app1/ {                       #you can replace app1 with your preferred name 
+    location /app1/ {                       #you can replace /app1/ with your preferred name 
         alias /etc/nginx/website/app1/;     #/absolute/path/to/your/application-1
         index index.html index.htm;
     }
 
-    location /app2/ {                       #you can replace app2 with your preferred name
+    location /app2/ {                       #you can replace /app2/ with your preferred name
         alias /etc/nginx/website/app2/;     #/absolute/path/to/your/application-2
         index index.html index.htm;
     }
 
-    location /app3/ {                       #you can replace app3 with your preferred name
+    location /app3/ {                       #you can replace /app3/ with your preferred name
         alias /etc/nginx/website/app3/;     #/absolute/path/to/your/application-3
         index index.html index.htm;
     }
