@@ -95,12 +95,14 @@ http {
 }
 --------------------------------------------------------------------------------------------------------------
 
-2. Host three custom application by creating a custom file.
+2. Host three custom application by creating a custom configuration file.
 # vi /etc/nginx/conf.d/custom_app.conf
 --------------------------------------------------------------------------------------------------------------
 server {
     listen 80;
     server_name your_server_ip or server_name;
+    root /etc/nginx/website/app;            #/absolute/path/to/your/application
+
 
     # Location blocks for static content
     location /app1/ {                        #you can replace /app1/ with your preferred name
@@ -122,8 +124,8 @@ server {
 # nginx -t
 # systemctl reload nginx
 
-==> Go to your browser and browse the url "http://your_public_ip/app1/" then "http://your_public_ip/app2/" and
-then "http://your_public_ip/app3/".
+==> Go to your browser and browse the url "http://your_public_ip/app" then "http://your_public_ip/app1/" then
+"http://your_public_ip/app2/" and then "http://your_public_ip/app3/".
 
 
 3. Host three custom application with error file if in case something went wrong
