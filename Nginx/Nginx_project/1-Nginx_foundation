@@ -176,5 +176,3 @@ then "http://your_public_ip/app3/".
 ==> For error_pages 404 browse something unusual url like "http://your_public_ip/app" and for error_pages 5ox
 stop nginx server(# systemctl stop nginx) and then browse a url "http://Your_public_ip/".
 
-
-4.Host three custom application and browse them by server ip address 
