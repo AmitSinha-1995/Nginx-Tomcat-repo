@@ -100,7 +100,7 @@ http {
 --------------------------------------------------------------------------------------------------------------
 server {
     listen 80;
-    server_name your_server_ip or server_name;
+    server_name your_server_ip or your_server_name;
     root /etc/nginx/website/app;            #/absolute/path/to/your/application
 
 
@@ -128,12 +128,12 @@ server {
 "http://your_public_ip/app2/" and then "http://your_public_ip/app3/".
 
 
-3. Host three custom application with error file if in case something went wrong
+3. Host three custom application with custom_error file.
 # vi /etc/nginx/conf.d/custom_app.conf
 --------------------------------------------------------------------------------------------------------------
 server {
     listen 80;
-    server_name your_server_ip or server_name;
+    server_name your_server_ip or your_server_name;
     root /etc/nginx/website/app;            #absolute/path/to/your/application
          
 
@@ -175,4 +175,127 @@ server {
 then "http://your_public_ip/app3/".
 ==> For error_pages 404 browse something unusual url like "http://your_public_ip/app" and for error_pages 5ox
 stop nginx server(# systemctl stop nginx) and then browse a url "http://Your_public_ip/".
+
+
+4. Configure custom_logs for application running in nginx:
+(i) Configure custom_logs to make it globally available.
+# vi /etc/nginx/nginx.conf
+Add the following syntax to your configuration file-
+--------------------------------------------------------------------------------------------------------------
+log_format custom '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+--------------------------------------------------------------------------------------------------------------
+
+(ii)Configure custom_logs in an individual configuration file of application.
+# vi /etc/nginx/conf.d/custom_logs.conf
+--------------------------------------------------------------------------------------------------------------
+server {
+    listen 80;
+    server_name your_server_ip or your_server_name;
+
+    log_format custom '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log /var/log/nginx/custom_log/access.log custom;
+    error_log /var/log/nginx/custom_log/error.log;
+
+    location / {
+        root absolute/path/to/your/application;
+    }
+}
+--------------------------------------------------------------------------------------------------------------
+
+
+5. Use of "return" directive in nginx-
+There are multiple way to use return directive, some of them are shown below-
+Syntax format- return code [text];
+               return code URL;
+               return URL;
+
+(i) Redirect any request to http://example.com/old to http://example.com/new
+--------------------------------------------------------------------------------------------------------------
+server {
+    listen 80;
+    server_name your_server_ip or your_server_name;
+
+    location /old {
+        return 301 /new;
+    }
+}
+--------------------------------------------------------------------------------------------------------------
+
+(ii) Custom Error Page, Return a custom error message with a 404 status code:
+--------------------------------------------------------------------------------------------------------------
+server {
+    listen 80;
+    server_name your_server_ip or your_server_name;
+
+    location /notfound {
+        return 404 "Page not found!";
+    }
+}
+--------------------------------------------------------------------------------------------------------------
+
+(iii) Redirect to an External URL, Redirect any request to http://example.com to http://www.example.com:
+--------------------------------------------------------------------------------------------------------------
+server {
+    listen 80;
+    server_name your_server_ip or your_server_name;
+
+    location / {
+        return 301 http://www.example.com;
+    }
+}
+--------------------------------------------------------------------------------------------------------------
+
+(iv) Return with a Specific Status Code, Return a 200 OK status with a custom message:
+--------------------------------------------------------------------------------------------------------------
+server {
+    listen 80;
+    server_name your_server_ip or your_server_name;
+
+    location /custom {
+        return 200 "Custom OK message";
+    }
+}
+--------------------------------------------------------------------------------------------------------------
+
+(v) If you need to use multiple conditions to determine different responses, you can use multiple if blocks
+within the location block. Here is an example:
+----------------------------------------------------------------------------------------------------------------
+server {
+    listen 80;
+    server_name your_server_ip or your_server_name;
+
+    location / {
+        if ($request_method = POST) {
+            return 405;
+        }
+
+        if ($request_uri ~* /old-path) {
+            return 301 /new-path;
+        }
+                
+        # Default response if none of the conditions are met
+        return 200 "Default OK response";
+    }
+}
+In this example:
+    If the request method is POST, NGINX returns a 405 status.
+    If the request URI matches /old-path, NGINX returns a 301 redirect to /new-path.
+    If none of the conditions are met, a default 200 response with a custom message is returned.
+----------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
 
