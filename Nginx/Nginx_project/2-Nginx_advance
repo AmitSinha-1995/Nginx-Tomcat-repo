@@ -1,5 +1,0 @@
-In Nginx advance we will focus on change nginx listen port number which means nginx will listen other configured
-port instead of port 80.
-Reverse proxy a 3000 port and other things that we can do with nginx.
-nginx reverse proxy an application which is not present in my localhost
-ssl certificate
