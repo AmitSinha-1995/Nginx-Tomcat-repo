@@ -1,1 +1,110 @@
+2. Host three custom application by creating a custom configuration file.
+# vi /etc/nginx/conf.d/custom_app.conf
+--------------------------------------------------------------------------------------------------------------
+server {
+    listen 80;
+    server_name your_server_ip or your_server_name;
+    root /etc/nginx/website/app;            #/absolute/path/to/your/application
 
+
+    # Location blocks for static content
+    location /app1/ {                        #you can replace /app1/ with your preferred name
+        alias /etc/nginx/website/app1/;      #/absolute/path/to/your/application-1
+        index index.html index.htm;
+    }
+
+    location /app2/ {                        #you can replace /app2/ with your preferred name
+        alias /etc/nginx/website/app2/;      #/absolue/path/to/your/application-2
+        index index.html index.htm;
+    }
+
+    location /app3/ {                        #you can replace /app3/ with your preferred name
+        alias /etc/nginx/website/app3/;      #/absolute/path/to/your/application-3
+        index index.html index.htm;
+    }
+}
+--------------------------------------------------------------------------------------------------------------
+# nginx -t
+# systemctl reload nginx
+
+==> Go to your browser and browse the url "http://your_public_ip/app" then "http://your_public_ip/app1/" then
+"http://your_public_ip/app2/" and then "http://your_public_ip/app3/".
+
+
+3. Host three custom application with custom_error file.
+# vi /etc/nginx/conf.d/custom_app.conf
+--------------------------------------------------------------------------------------------------------------
+server {
+    listen 80;
+    server_name your_server_ip or your_server_name;
+    root /etc/nginx/website/app;            #absolute/path/to/your/application
+         
+
+    # Location blocks for static content
+    location /app1/ {                       #you can replace /app1/ with your preferred name 
+        alias /etc/nginx/website/app1/;     #/absolute/path/to/your/application-1
+        index index.html index.htm;
+    }
+
+    location /app2/ {                       #you can replace /app2/ with your preferred name
+        alias /etc/nginx/website/app2/;     #/absolute/path/to/your/application-2
+        index index.html index.htm;
+    }
+
+    location /app3/ {                       #you can replace /app3/ with your preferred name
+        alias /etc/nginx/website/app3/;     #/absolute/path/to/your/application-3
+        index index.html index.htm;
+    }
+
+    # Location block for custom 404 error page
+    error_page 404 /custom_404.html;
+    location = /custom_404.html {
+        root /etc/nginx/website            #/absolute/path/to/your/error_pages
+        internal;
+    }
+
+    # Location block for custom 50x error page
+    error_page 500 502 503 504 /custom_50x.html;
+    location = /custom_50x.html {
+        root /etc/nginx/website           #/absolute/path/to/your/error_pages
+        internal;
+    }
+}
+--------------------------------------------------------------------------------------------------------------
+# nginx -t
+# systemctl reload nginx
+
+==> Go to your browser and browse the url "http://your_public_ip/app1/" then "http://your_public_ip/app2/" and
+then "http://your_public_ip/app3/".
+==> For error_pages 404 browse something unusual url like "http://your_public_ip/app" and for error_pages 5ox
+stop nginx server(# systemctl stop nginx) and then browse a url "http://Your_public_ip/".
+
+
+4. Configure custom_logs for application running in nginx:
+(i) Configure custom_logs to make it globally available.
+# vi /etc/nginx/nginx.conf
+Add the following syntax to your configuration file-
+--------------------------------------------------------------------------------------------------------------
+log_format custom '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+--------------------------------------------------------------------------------------------------------------
+
+(ii)Configure custom_logs in an individual configuration file of application.
+# vi /etc/nginx/conf.d/custom_logs.conf
+--------------------------------------------------------------------------------------------------------------
+server {
+    listen 80;
+    server_name your_server_ip or your_server_name;
+
+    log_format custom '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log /var/log/nginx/custom_log/access.log custom;
+    #error_log /var/log/nginx/custom_log/error.log;
+
+    location / {
+        root absolute/path/to/your/application;
+    }
+}
